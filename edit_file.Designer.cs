@@ -81,7 +81,7 @@ namespace computer1
             // 
             this.textBox3.AcceptsReturn = true;
             this.textBox3.Location = new System.Drawing.Point(31, 183);
-            this.textBox3.MaxLength = 125;
+            this.textBox3.MaxLength = 255;
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;

@@ -76,7 +76,7 @@ namespace computer1
             //写入文件内容
             ii = start_num;
             int ji = 0;
-            if(disk[ii]!=ii)
+            while(disk[ii]!=ii)
             {
                 //如果块内不是空，先清空再写入
                 if (disk[ii*64]!=32)
@@ -92,8 +92,9 @@ namespace computer1
                 {
                     disk[ii * 64 + i] = bytes[i];
                 }
+                ii = disk[ii];
             }
-            else
+            if(disk[ii]==ii)
             {
                 //如果块内不是空，先清空再写入
                 if (disk[ii * 64] != 32)

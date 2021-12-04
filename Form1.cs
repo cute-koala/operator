@@ -461,8 +461,9 @@ namespace computer1
             {
                 Label lab1 = (this.Controls.Find("label" + Convert.ToString(ii + 1), true).First()) as Label;
                 lab1.BackColor = Color.YellowGreen;
+                int t = fat[ii];
                 fat[ii] = 128;
-                ii = fat[ii];
+                ii = t;
             }
             if (fat[ii] == ii)
             {
