@@ -41,7 +41,7 @@ namespace computer1
             f.Close();
         }
         //添加文件
-        public static void add_file(string path, string filename, string filetype, int store,int start_num,int end_num,string context, int tree_num)
+        public static void add_file(string path, string filename, string filetype, int store,int start_num,byte[] fat,string context, int tree_num)
         {
             //路径 文件名 文件类型 存储块号 起始盘块号 第二块盘块号 文件内容 块内已有表项
 
@@ -50,14 +50,14 @@ namespace computer1
             byte[] disk=new byte[128*64];
             f.Read(disk,0,128*64);
             f.Close();
-            if(context.Length<=128)
-                disk[start_num] = (byte)(start_num);
-            else
+            int ii = start_num;
+            while(fat[ii]!=ii)
             {
-                disk[start_num] = (byte)(end_num);
-                disk[end_num] = (byte)(end_num);
+                disk[ii] = fat[ii];
+                ii = fat[ii];
             }
-
+            if (fat[ii] == ii)
+                disk[ii] = (byte)(ii);
             //更新文件控制块
             while (filename.Length < 3)
                 filename = filename + " ";
@@ -74,35 +74,39 @@ namespace computer1
                     disk[store * 64 + tree_num * 8 + i] = (byte)(context.Length);
             }
             //写入文件内容
-            byte[] byte2 = Encoding.UTF8.GetBytes(context);
-            if(context.Length<128)
+            ii = start_num;
+            int ji = 0;
+            if(disk[ii]!=ii)
             {
                 //如果块内不是空，先清空再写入
-                if (disk[start_num*64]!=32)
+                if (disk[ii*64]!=32)
                 {
                     for (int i = 0; i < 64; i++)
-                        disk[start_num * 64 + i] = 32;
+                        disk[ii * 64 + i] = 32;
                 }
-                for(int i=0;i<byte2.Length;i++)
-                    disk[start_num * 64 + i] = byte2[i];
+                byte[] bytes = new byte[64];
+                char[] c = context.ToCharArray();
+                bytes=Encoding.UTF8.GetBytes(c,ji*64,64);
+                ji++;
+                for(int i=0;i<64;i++)
+                {
+                    disk[ii * 64 + i] = bytes[i];
+                }
             }
             else
             {
                 //如果块内不是空，先清空再写入
-                if (disk[start_num * 64] != 32)
+                if (disk[ii * 64] != 32)
                 {
                     for (int i = 0; i < 64; i++)
-                        disk[start_num * 64 + i] = 32;
+                        disk[ii * 64 + i] = 32;
                 }
-                if (disk[end_num * 64] != 32)
+                byte[] bytes = byte1 = Encoding.UTF8.GetBytes(context.ToCharArray(), ji * 64,context.Length%64);
+                ji++;
+                for (int i = 0; i < context.Length % 64; i++)
                 {
-                    for (int i = 0; i < 64; i++)
-                        disk[end_num * 64 + i] = 32;
+                    disk[ii * 64 + i] = bytes[i];
                 }
-                for (int i = 0; i < 128; i++)
-                    disk[start_num * 64 + i] = byte2[i];
-                for (int i = 0; i < byte2.Length-128; i++)
-                    disk[end_num * 64 + i] = byte2[i+128];
             }
             f = new FileStream(path, FileMode.Truncate, FileAccess.Write);
             f.Write(disk, 0, disk.Length);
@@ -166,7 +170,6 @@ namespace computer1
             TreeNode[] childerns = childern.ToArray();
             node.Nodes.AddRange(childerns);
         }
-        
     }
 
 }

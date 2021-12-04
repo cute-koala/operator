@@ -38,6 +38,7 @@ namespace computer1
         }
 
         //定义属性值
+        //文件名
         public string file_name
         {
             get
@@ -49,6 +50,7 @@ namespace computer1
                 this.textBox1.Text = value;
             }
         }
+        //文件类型
         public string file_type
         {
             get 
@@ -60,6 +62,7 @@ namespace computer1
                 textBox2.Text = value;
             }
         }
+        //文本框
         public string context
         {
             get 

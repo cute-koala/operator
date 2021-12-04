@@ -259,7 +259,11 @@ namespace computer1
             string file_name = window.file_name;
             string file_type = window.file_type;
             string context = window.context;
-            Console.WriteLine(context.Length);
+            if(context.Length>256)
+            {
+                MessageBox.Show("字数超出限制!");
+                return;
+            }
 
             /*查找父节点的起始盘块号*/
             string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
@@ -302,49 +306,49 @@ namespace computer1
             f.Close();
 
             /*查找空闲块并刷新位示图*/
-            int start = 3;
-            if (context.Length <= 128)
-            {
-                for (; start < 128; start++)
-                {
-                    if (fat[start] == 128)
-                    {
-                        //刷新位示图
-                        fat[start] = (byte)(start);
-                        Label lab = (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
-                        lab.BackColor = Color.DodgerBlue;
-                        break;
-                    }
-                    else if (start == 127)
-                    {
-                        MessageBox.Show("磁盘空间已满！");
-                        return;
-                    }
-                }
-            }
+            int start = 4;
+            int count_;
+            int pre=0;
+            int start_num = 0 ;
+            if (context.Length % 64 == 0)
+                count_ = context.Length / 64;
             else
+                count_ = context.Length / 64+1;
+
+            for (; start < 128; start++)
             {
-                int count_ = 2;
+                if (fat[start] == 128)
+                {
+                    pre = start;
+                    start_num = start;
+                    fat[pre] = (byte)(start);
+                    Label lab = (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
+                    lab.BackColor = Color.DodgerBlue;
+                    count_--;
+                    start++;
+                    break;
+                }
+                else if(start==127)
+                {
+                    MessageBox.Show("磁盘空间已满！");
+                    return;
+                }
+            }
+             while (count_ > 0)
+             {
                 for (; start < 128; start++)
                 {
-                    if (fat[start] == 128 && count_==2)
+                    if(fat[start] == 128)
                     {
+                        if (count_ <= 0)
+                            break;
+                        fat[pre] = (byte)(start);
                         fat[start] = (byte)(start);
-                        count_ = start;
-                        continue;
-                    }
-                    else if(fat[start] == 128 && count_ !=2)
-                    {
-
-                        fat[count_] = (byte)(start);
-                        fat[start] = (byte)(start);
+                        pre = start;
+                        count_--;
                         //刷新位示图
-                        Label lab = (this.Controls.Find("label" + Convert.ToString(count_ + 1), true).First()) as Label;
+                        Label lab= (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
                         lab.BackColor = Color.DodgerBlue;
-                        lab= (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
-                        lab.BackColor = Color.DodgerBlue;
-                        start = count_;
-                        break;
                     }
                     else if (start == 127)
                     {
@@ -353,9 +357,8 @@ namespace computer1
                     }
                 }
             }
-
             //向父目录节点内写入文件控制块信息
-            file_option.add_file(path, file_name,file_type,store, start,fat[start],context,count);
+            file_option.add_file(path, file_name,file_type,store, start_num,fat,context,count);
             
             //写入图标
             TreeNode newnode = new TreeNode(file_name, 0, 1);
@@ -412,31 +415,27 @@ namespace computer1
             }
             f.Close();
 
-            /*判断内容是两块还是一块*/
-            //1块
-            string context;
-            if(fat[store]==store)
-            {
-                f = new FileStream(path, FileMode.Open, FileAccess.Read);
-                f.Seek(store*64, SeekOrigin.Begin);
-                byte[] bytes = new byte[64];
-                f.Read(bytes, 0, 64);
-                f.Close();
-                context = Encoding.UTF8.GetString(bytes,0,64).Trim();
-            }
-            else
+            /*提取内容*/
+            string context="";
+            int ii = store;
+            while(fat[ii]!=ii)
             {
                 int next = fat[store];
                 f = new FileStream(path, FileMode.Open, FileAccess.Read);
                 f.Seek(store * 64, SeekOrigin.Begin);
-                byte[] bytes1 = new byte[64];
-                byte[] bytes2 = new byte[64];
-                f.Read(bytes1, 0, 64);
-                f.Seek(64 * next, SeekOrigin.Begin);
-                f.Read(bytes2, 0, 64);
+                byte[] t = new byte[64];
+                f.Read(t, 0, 64);
                 f.Close();
-                context = Encoding.UTF8.GetString(bytes1) + Encoding.UTF8.GetString(bytes2).Trim();
+                context = context+Encoding.UTF8.GetString(t);
+                ii = fat[ii];
             }
+            f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Seek(ii*64, SeekOrigin.Begin);
+            byte[] bytes3 = new byte[64];
+            f.Read(bytes3, 0, 64);
+            f.Close();
+            context = context+Encoding.UTF8.GetString(bytes3,0,64).Trim();
+            
 
             /*修改文件内容*/
             edit_file window = new edit_file();
@@ -449,21 +448,74 @@ namespace computer1
             filename = window.file_name;
             filetype = window.file_type;
             context = window.context;
-            this.treeView1.SelectedNode.Text = filename;//修改节点名字
-            if (context.Length>128 && fat[store]==store)//原先只有一个块，现在需要两个块
+            if (context.Length > 256)
             {
-                //查找空闲块
-                int start = 3;
+                MessageBox.Show("字数超出限制!");
+                return;
+            }
+            this.treeView1.SelectedNode.Text = filename;//修改节点名字
+            
+            //更改位示图
+            ii = store;
+            while(fat[ii]!=ii)
+            {
+                Label lab1 = (this.Controls.Find("label" + Convert.ToString(ii + 1), true).First()) as Label;
+                lab1.BackColor = Color.YellowGreen;
+                fat[ii] = 128;
+                ii = fat[ii];
+            }
+            if (fat[ii] == ii)
+            {
+                Label lab1 = (this.Controls.Find("label" + Convert.ToString(ii + 1), true).First()) as Label;
+                lab1.BackColor = Color.YellowGreen;
+                fat[ii] = 128;
+            }
+
+
+            //根据新的内容重新查找空闲块
+            int start = 4;
+            int count_;
+            int pre = 0;
+            int start_num = 0;
+            if (context.Length % 64 == 0)
+                count_ = context.Length / 64;
+            else
+                count_ = context.Length / 64 + 1;
+
+            for (; start < 128; start++)
+            {
+                if (fat[start] == 128)
+                {
+                    pre = start;
+                    start_num = start;
+                    fat[pre] = (byte)(start);
+                    Label lab1 = (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
+                    lab1.BackColor = Color.DodgerBlue;
+                    count_--;
+                    start++;
+                    break;
+                }
+                else if (start == 127)
+                {
+                    MessageBox.Show("磁盘空间已满！");
+                    return;
+                }
+            }
+            while (count_ > 0)
+            {
                 for (; start < 128; start++)
                 {
                     if (fat[start] == 128)
                     {
-                        //刷新位示图
+                        if (count_ <= 0)
+                            break;
+                        fat[pre] = (byte)(start);
                         fat[start] = (byte)(start);
-                        fat[store] = (byte)(start);
-                        Label lab = (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
-                        lab.BackColor = Color.DodgerBlue;
-                        break;
+                        pre = start;
+                        count_--;
+                        //刷新位示图
+                        Label lab1 = (this.Controls.Find("label" + Convert.ToString(start + 1), true).First()) as Label;
+                        lab1.BackColor = Color.DodgerBlue;
                     }
                     else if (start == 127)
                     {
@@ -471,31 +523,9 @@ namespace computer1
                         return;
                     }
                 }
-                //写入内容
-                file_option.add_file(path, filename, filetype, j % 64, store, fat[store], context, count - 1);
             }
-            else if(context.Length <=128 && fat[store] != store)//原先有两个块，现在需要一个块
-            {
-                //释放一个块
-                f = new FileStream(path, FileMode.Open, FileAccess.Read);
-                for(int i=0;i<64;i++)
-                {
-                    fat[fat[store] + i] = (byte)(32);
-                }
-                f.Close();
-                //修改位示图
-                Label lab = (this.Controls.Find("label" + Convert.ToString(fat[store] + 1), true).First()) as Label;
-                lab.BackColor = Color.DodgerBlue;
-                fat[store] = (byte)(store);
-                //写入磁盘
-                f = new FileStream(path, FileMode.Truncate, FileAccess.Write);
-                f.Write(fat, 0, fat.Length);
-                f.Close();
-                //写入内容
-                file_option.add_file(path, filename, filetype, j / 64, store, fat[store], context, count - 1);
-            }
-            else
-                file_option.add_file(path, filename, filetype, j/64, store, fat[store], context, count - 1);
+            //重新写入内容
+            file_option.add_file(path, filename, filetype, j/64, start_num, fat, context, count - 1);
         }
     }
 }
