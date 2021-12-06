@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace computer1
 {
-    class file_option
+    class file_option: System.Collections.IComparer
     {
         //添加目录
         public static void add_tree(string path,string filename,int store,int start_num ,int tree_num)
@@ -50,14 +50,10 @@ namespace computer1
             byte[] disk=new byte[128*64];
             f.Read(disk,0,128*64);
             f.Close();
-            int ii = start_num;
-            while(fat[ii]!=ii)
+            for(int i=0;i<128;i++)
             {
-                disk[ii] = fat[ii];
-                ii = fat[ii];
+                disk[i] = fat[i];
             }
-            if (fat[ii] == ii)
-                disk[ii] = (byte)(ii);
             //更新文件控制块
             while (filename.Length < 3)
                 filename = filename + " ";
@@ -74,7 +70,7 @@ namespace computer1
                     disk[store * 64 + tree_num * 8 + i] = (byte)(context.Length);
             }
             //写入文件内容
-            ii = start_num;
+            int ii = start_num;
             int ji = 0;
             while(disk[ii]!=ii)
             {
@@ -170,6 +166,16 @@ namespace computer1
                 return;
             TreeNode[] childerns = childern.ToArray();
             node.Nodes.AddRange(childerns);
+        }
+        //为节点排序定义排序逻辑
+        public int Compare(object x,object y)
+        {
+            TreeNode tx = x as TreeNode;
+            TreeNode ty = y as TreeNode;
+            if (tx.ImageIndex > ty.ImageIndex)
+                return 0;
+            else
+                return 1;
         }
     }
 

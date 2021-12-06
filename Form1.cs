@@ -53,7 +53,7 @@ namespace computer1
             f.Close();
         }
 
-        /*刷新磁盘（每改变一次磁盘就刷新一次）未完待续*/
+        /*刷新磁盘（每改变一次磁盘就刷新一次)*/
         private void init_()
         {  
             for(int i=1;i<=128;i++)
@@ -98,6 +98,7 @@ namespace computer1
                     newnode.Expand();
                 }
             }
+            treeView1.TreeViewNodeSorter = new file_option();
 
         }
 
@@ -239,7 +240,8 @@ namespace computer1
             newnode.ContextMenuStrip = menu2;
             this.treeView1.SelectedNode.Nodes.Add(newnode);
             this.treeView1.SelectedNode.Expand();
-            
+            treeView1.TreeViewNodeSorter = new file_option();
+
         }
         private void 添加文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -365,8 +367,136 @@ namespace computer1
             newnode.ContextMenuStrip = menu3;
             this.treeView1.SelectedNode.Nodes.Add(newnode);
             this.treeView1.SelectedNode.Expand();
+            treeView1.TreeViewNodeSorter = new file_option();
         }
+        private void 删除目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*查找该节点的起始盘块号*/
+            string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
+            string filename = this.treeView1.SelectedNode.Text;//文件名
+            string filetype;//文件类型
+            string name = "";
+            FileStream f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Seek(128, SeekOrigin.Begin);
+            int j = 128;
+            int store;//起始盘块号
+            while (true)
+            {
 
+                byte[] bytes = new byte[3];
+                byte[] bytes1 = new byte[1];
+                byte[] bytes2 = new byte[2];
+                int i;
+                for (i = 0; i < 3; i++)
+                {
+                    f.Read(bytes1, 0, 1);
+                    if (bytes1[0] == Encoding.UTF8.GetBytes(" ").First())
+                    {
+                        break;
+                    }
+                    bytes[i] = bytes1[0];
+                }
+                name = Encoding.UTF8.GetString(bytes, 0, i);
+                if (name == filename)
+                {
+                    f.Seek(j + 3, SeekOrigin.Begin);
+                    f.Read(bytes2, 0, 2);
+                    filetype = Encoding.UTF8.GetString(bytes2).Trim();
+                    f.Seek(j + 6, SeekOrigin.Begin);
+                    store = f.ReadByte();
+                    break;
+                }
+                else
+                {
+                    j = j + 8;
+                    f.Seek(j, SeekOrigin.Begin);
+                }
+
+            }
+            f.Close();
+
+            /*递归删除目录项*/
+            byte[] disk = new byte[128 * 64];//读磁盘
+            f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Read(disk, 0, 128 * 64);
+            f.Close();
+
+            Stack<string> ftype = new Stack<string>();//存文件类型
+            Stack<int> fstore = new Stack<int>();//存文件起始盘块号
+            byte[] file_context = new byte[64];
+            ftype.Push("d");
+            fstore.Push(store);
+            while(fstore.Count!=0)
+            {
+                store = fstore.Pop();
+                filetype = ftype.Pop();
+                for(int i=store*64;i<(store+1)*64;i++)
+                {
+                    file_context[i - store * 64] = disk[i];
+                }
+
+                if(filetype=="d")//如果是目录的话
+                {
+                    disk[store] = 128;//更改文件分配表
+                    for (int i = store * 64; i < (store + 1) * 64; i++)//删除内容
+                    {
+                        disk[i] = 32;
+                    }
+                    for (int jj=0;jj<64;jj=jj+8)
+                    {
+                        if (file_context[jj] != 32)
+                        {
+                            filetype = Encoding.UTF8.GetString(file_context, jj + 5, 1);
+                            store = file_context[jj + 6];
+                            ftype.Push(filetype);
+                            fstore.Push(store);
+                        }
+                        else
+                            break;
+                    }
+                }
+                else if(filetype=="l")//如果是文件的话
+                {
+                    while(disk[store]!=store)
+                    {
+                        //清理空间
+                        for (int i = store * 64; i < (store + 1) * 64; i++)
+                        {
+                            disk[i] = 32;
+                        }
+                        //更改文件分配表
+                        int t = disk[store];
+                        disk[store] = 128;
+                        store = t;
+                    }
+                    if(disk[store]==store)
+                    {
+                        //清理空间
+                        for (int i = store * 64; i < (store + 1) * 64; i++)
+                        {
+                            disk[i] = 32;
+                        }
+                        //更改文件分配表
+                        disk[store] = 128;
+                    }
+
+                }
+            }
+            for (int i = j; i < ((j / 64 + 1) * 64 - 8); i++)
+            {
+                disk[i] = disk[i + 8];
+            }
+            for (int i = ((j / 64 + 1) * 64 - 8); i < (j / 64 + 1) * 64; i++)
+            {
+                disk[i] = 32;
+            }
+            f = new FileStream(path, FileMode.Truncate, FileAccess.Write);
+            f.Write(disk, 0, 128 * 64);
+            f.Close();
+            treeView1.SelectedNode.Nodes.Clear();
+            treeView1.Nodes.Remove(treeView1.SelectedNode);
+            init_();
+        }
         /*menu3右键菜单*/
         private void 编辑文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -528,5 +658,98 @@ namespace computer1
             //重新写入内容
             file_option.add_file(path, filename, filetype, j/64, start_num, fat, context, count - 1);
         }
+        private void 删除文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /*查找该节点的起始盘块号*/
+            string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
+            string filename=this.treeView1.SelectedNode.Text;//文件名
+            string name = "";
+            FileStream f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Seek(128, SeekOrigin.Begin);
+            int j = 128;
+            int store;//起始盘块号
+            while (true)
+            {
+
+                byte[] bytes = new byte[3];
+                byte[] bytes1 = new byte[1];
+                byte[] bytes2 = new byte[2];
+                f.Read(bytes, 0, 3);
+                name = Encoding.UTF8.GetString(bytes, 0, 3).Trim();
+                if (name == filename)
+                {
+                    f.Seek(j + 3, SeekOrigin.Begin);
+                    f.Read(bytes2, 0, 2);
+                    f.Seek(j + 6, SeekOrigin.Begin);
+                    store = f.ReadByte();
+                    break;
+                }
+                else
+                {
+                    j = j + 8;
+                    f.Seek(j, SeekOrigin.Begin);
+                }
+            }
+            f.Close();
+            //修改文件分配表 修改位示图
+            int ii = store;
+            Stack<int> p=new Stack<int>();
+            while(fat[ii]!=ii)
+            {
+                p.Push(ii);
+                Label lab1 = (this.Controls.Find("label" + Convert.ToString(ii + 1), true).First()) as Label;
+                lab1.BackColor = Color.YellowGreen;
+                int t = fat[ii];
+                fat[ii] = 128;
+                ii = t;
+
+            }
+            if (fat[ii] == ii)
+            {
+                p.Push(ii);
+                Label lab1 = (this.Controls.Find("label" + Convert.ToString(ii + 1), true).First()) as Label;
+                lab1.BackColor = Color.YellowGreen;
+                fat[ii] = 128;
+            }
+                
+            
+
+            //写入磁盘
+            f = new FileStream(path, FileMode.Open);
+            byte[] disk = new byte[128 * 64];
+            f.Read(disk, 0, 128 * 64);
+            f.Close();
+            //文件分配表
+            for (int i = 0; i < 128; i++)
+            {
+                disk[i] = fat[i];
+            }
+            //文件内容
+            while(p.Count!=0)
+            {
+                int m = p.Pop();
+                for(int i=0;i<64;i++)
+                {
+                    disk[m * 64 + i] = 32;
+                }
+            }
+            //文件控制块
+            for (int i = j; i < ((j/64+1)*64-8); i++)
+            {
+                disk[i] = disk[i + 8];
+            }
+            for(int i= ((j / 64 + 1) * 64-8); i< (j / 64 + 1) * 64;i++)
+            {
+                disk[i] = 32;
+            }
+            f = new FileStream(path, FileMode.Truncate, FileAccess.Write);
+            f.Write(disk, 0, disk.Length);
+            f.Close();
+
+            //修改视图
+            treeView1.Nodes.Remove(treeView1.SelectedNode);
+        }
+
+
     }
 }

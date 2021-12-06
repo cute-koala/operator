@@ -193,27 +193,28 @@ namespace computer1
             this.添加目录ToolStripMenuItem,
             this.删除目录ToolStripMenuItem});
             this.menu2.Name = "menu2";
-            this.menu2.Size = new System.Drawing.Size(139, 76);
+            this.menu2.Size = new System.Drawing.Size(211, 104);
             // 
             // 添加文件ToolStripMenuItem
             // 
             this.添加文件ToolStripMenuItem.Name = "添加文件ToolStripMenuItem";
-            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.添加文件ToolStripMenuItem.Text = "添加文件";
             this.添加文件ToolStripMenuItem.Click += new System.EventHandler(this.添加文件ToolStripMenuItem_Click);
             // 
             // 添加目录ToolStripMenuItem
             // 
             this.添加目录ToolStripMenuItem.Name = "添加目录ToolStripMenuItem";
-            this.添加目录ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.添加目录ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.添加目录ToolStripMenuItem.Text = "添加目录";
             this.添加目录ToolStripMenuItem.Click += new System.EventHandler(this.添加目录ToolStripMenuItem_Click);
             // 
             // 删除目录ToolStripMenuItem
             // 
             this.删除目录ToolStripMenuItem.Name = "删除目录ToolStripMenuItem";
-            this.删除目录ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.删除目录ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.删除目录ToolStripMenuItem.Text = "删除目录";
+            this.删除目录ToolStripMenuItem.Click += new System.EventHandler(this.删除目录ToolStripMenuItem_Click);
             // 
             // menu1
             // 
@@ -1612,6 +1613,7 @@ namespace computer1
             this.删除文件ToolStripMenuItem.Name = "删除文件ToolStripMenuItem";
             this.删除文件ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.删除文件ToolStripMenuItem.Text = "删除文件";
+            this.删除文件ToolStripMenuItem.Click += new System.EventHandler(this.删除文件ToolStripMenuItem_Click);
             // 
             // Form1
             // 
