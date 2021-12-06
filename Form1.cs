@@ -16,6 +16,7 @@ namespace computer1
     {
         private byte[] fat = new byte[128];
         private byte[] root = new byte[64];
+        private List<string> Names = new List<string>();
         public Form1()
         {
             //format();
@@ -121,7 +122,12 @@ namespace computer1
             string file_name=window.file_name;
             if (file_name == "")
                 return;
-         
+            else if(Names.Contains(file_name))
+            {
+                MessageBox.Show("该名称已存在！");
+                return;
+            }
+            Names.Add(file_name);
             //磁盘中写入文件控制块
             //寻找磁盘块
             int i = 3;
@@ -173,6 +179,12 @@ namespace computer1
             string file_name = window.file_name;
             if (file_name == "")
                 return;
+            else if (Names.Contains(file_name))
+            {
+                MessageBox.Show("该名称已存在！");
+                return;
+            }
+            Names.Add(file_name);
 
             //查找父节点的起始盘块号
             string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
@@ -261,11 +273,17 @@ namespace computer1
             string file_name = window.file_name;
             string file_type = window.file_type;
             string context = window.context;
-            if(context.Length>256)
+            if (context.Length>256)
             {
                 MessageBox.Show("字数超出限制!");
                 return;
             }
+            if (Names.Contains(file_name))
+            {
+                MessageBox.Show("该名称已存在！");
+                return;
+            }
+            Names.Add(file_name);
 
             /*查找父节点的起始盘块号*/
             string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
@@ -420,14 +438,17 @@ namespace computer1
             f = new FileStream(path, FileMode.Open, FileAccess.Read);
             f.Read(disk, 0, 128 * 64);
             f.Close();
-
+            Stack<string> fname = new Stack<string>();//存文件名称
             Stack<string> ftype = new Stack<string>();//存文件类型
             Stack<int> fstore = new Stack<int>();//存文件起始盘块号
             byte[] file_context = new byte[64];
+            fname.Push(filename);
             ftype.Push("d");
             fstore.Push(store);
             while(fstore.Count!=0)
             {
+                filename = fname.Pop();
+                Names.Remove(filename);
                 store = fstore.Pop();
                 filetype = ftype.Pop();
                 for(int i=store*64;i<(store+1)*64;i++)
@@ -446,8 +467,10 @@ namespace computer1
                     {
                         if (file_context[jj] != 32)
                         {
+                            filename= Encoding.UTF8.GetString(file_context, jj, 3).Trim();
                             filetype = Encoding.UTF8.GetString(file_context, jj + 5, 1);
                             store = file_context[jj + 6];
+                            fname.Push(filename);
                             ftype.Push(filetype);
                             fstore.Push(store);
                         }
@@ -569,6 +592,7 @@ namespace computer1
 
             /*修改文件内容*/
             edit_file window = new edit_file();
+            string k = filename;//用于Names
             window.context = context;
             window.file_name = filename;
             window.file_type = filetype;
@@ -583,6 +607,13 @@ namespace computer1
                 MessageBox.Show("字数超出限制!");
                 return;
             }
+            if(Names.Contains(filename))
+            {
+                MessageBox.Show("该名称已存在！");
+                return;
+            }
+            Names.Remove(k);
+            Names.Add(filename);
             this.treeView1.SelectedNode.Text = filename;//修改节点名字
             
             //更改位示图
@@ -748,6 +779,7 @@ namespace computer1
 
             //修改视图
             treeView1.Nodes.Remove(treeView1.SelectedNode);
+            Names.Remove(filename);
         }
 
 
