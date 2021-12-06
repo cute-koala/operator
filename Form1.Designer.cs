@@ -42,6 +42,7 @@ namespace computer1
             this.格式化磁盘ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -179,6 +180,7 @@ namespace computer1
             this.删除文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu2.SuspendLayout();
             this.menu1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -193,26 +195,26 @@ namespace computer1
             this.添加目录ToolStripMenuItem,
             this.删除目录ToolStripMenuItem});
             this.menu2.Name = "menu2";
-            this.menu2.Size = new System.Drawing.Size(211, 104);
+            this.menu2.Size = new System.Drawing.Size(139, 76);
             // 
             // 添加文件ToolStripMenuItem
             // 
             this.添加文件ToolStripMenuItem.Name = "添加文件ToolStripMenuItem";
-            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.添加文件ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.添加文件ToolStripMenuItem.Text = "添加文件";
             this.添加文件ToolStripMenuItem.Click += new System.EventHandler(this.添加文件ToolStripMenuItem_Click);
             // 
             // 添加目录ToolStripMenuItem
             // 
             this.添加目录ToolStripMenuItem.Name = "添加目录ToolStripMenuItem";
-            this.添加目录ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.添加目录ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.添加目录ToolStripMenuItem.Text = "添加目录";
             this.添加目录ToolStripMenuItem.Click += new System.EventHandler(this.添加目录ToolStripMenuItem_Click);
             // 
             // 删除目录ToolStripMenuItem
             // 
             this.删除目录ToolStripMenuItem.Name = "删除目录ToolStripMenuItem";
-            this.删除目录ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.删除目录ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.删除目录ToolStripMenuItem.Text = "删除目录";
             this.删除目录ToolStripMenuItem.Click += new System.EventHandler(this.删除目录ToolStripMenuItem_Click);
             // 
@@ -258,10 +260,21 @@ namespace computer1
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(781, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(330, 115);
             this.panel1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(330, 115);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // treeView1
             // 
@@ -1627,6 +1640,8 @@ namespace computer1
             this.Text = "Form1";
             this.menu2.ResumeLayout(false);
             this.menu1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -1781,6 +1796,7 @@ namespace computer1
         private System.Windows.Forms.ToolStripMenuItem 编辑文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除目录ToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

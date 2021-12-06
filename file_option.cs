@@ -10,6 +10,7 @@ namespace computer1
 {
     class file_option: System.Collections.IComparer
     {
+        /*图形接口*/
         //添加目录
         public static void add_tree(string path,string filename,int store,int start_num ,int tree_num)
         {
@@ -110,7 +111,7 @@ namespace computer1
             f.Close();
         }
         //递归遍历磁盘
-        public static void Traverse(int start, TreeNode node,ContextMenuStrip menu_d, ContextMenuStrip menu_l)
+        public static void Traverse(int start, TreeNode node,ContextMenuStrip menu_d, ContextMenuStrip menu_l,List<string> Names)
         {
             string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
             FileStream f = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
@@ -140,6 +141,8 @@ namespace computer1
                 ld = Encoding.UTF8.GetString(a);
 
                 TreeNode newnode = new TreeNode(filename);
+                newnode.Name = filename;
+                Names.Add(filename);
                 if (ld == "d")//针对目录,需要递归
                 {
                     newnode.ContextMenuStrip = menu_d;
@@ -147,7 +150,7 @@ namespace computer1
                     newnode.SelectedImageIndex = 3;
                     newnode.Expand();
                     childern.Add(newnode);
-                    Traverse(start_, childern[ii], menu_d, menu_l);
+                    Traverse(start_, childern[ii], menu_d, menu_l,Names);
                     ii++;
                     i = i + 8;
                 }
