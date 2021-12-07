@@ -14,6 +14,18 @@ namespace computer1
 {
     public partial class Form1 : Form
     {
+        /*进程控制块变量*/
+        struct PCB
+        {
+            int id;//标识符
+            int x;//寄存器
+            string state;//状态
+            int reason;//阻塞原因
+        }
+        private List<PCB> Block = new List<PCB>();//阻塞队列
+        private List<PCB> Ready = new List<PCB>();//就绪队列
+
+        /*磁盘初始化变量*/
         private byte[] fat = new byte[128];
         private byte[] root = new byte[64];
         private List<string> Names = new List<string>();
@@ -24,6 +36,9 @@ namespace computer1
             //刷新磁盘
             init_();
         }
+
+
+
 
         /*格式化*/
         private void format()
@@ -95,7 +110,7 @@ namespace computer1
 
                     TreeNode newnode = new TreeNode(filename, 2, 3);
                     newnode.Name = filename;
-                    file_option.Traverse(start, newnode,menu2,menu3,Names);
+                    file_option.Traverse(start, newnode,menu2,menu3,menu3e,Names);
                     this.treeView1.Nodes.Add(newnode);
                     newnode.ContextMenuStrip = menu2;
                     newnode.Expand();
@@ -386,7 +401,10 @@ namespace computer1
             
             //写入图标
             TreeNode newnode = new TreeNode(file_name, 0, 1);
-            newnode.ContextMenuStrip = menu3;
+            if(file_type=="ex")
+                newnode.ContextMenuStrip = menu3e;
+            else
+                newnode.ContextMenuStrip = menu3;
             newnode.Name = file_name;
             this.treeView1.SelectedNode.Nodes.Add(newnode);
             this.treeView1.SelectedNode.Expand();
@@ -619,6 +637,8 @@ namespace computer1
                 this.treeView1.SelectedNode.Text = filename;//修改节点名字
                 this.treeView1.SelectedNode.Name = filename;
             }
+            if (filetype == "ex")
+                this.treeView1.SelectedNode.ContextMenuStrip = menu3e;
             //更改位示图
             ii = store;
             while(fat[ii]!=ii)
@@ -785,6 +805,19 @@ namespace computer1
             Names.Remove(filename);
         }
 
+        /*menu3e右键菜单*/
+        private void 运行文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void 编辑文件ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            编辑文件ToolStripMenuItem_Click(sender, e);
+        }
+        private void 删除文件ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            删除文件ToolStripMenuItem_Click(sender, e);
+        }
         /*命令接口*/
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1354,6 +1387,5 @@ namespace computer1
                 }
             }
         }
-
     }
 }

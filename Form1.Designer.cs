@@ -178,6 +178,39 @@ namespace computer1
             this.menu3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.编辑文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.menu3e = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.运行文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑文件ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除文件ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.t1 = new System.Windows.Forms.Label();
+            this.t2 = new System.Windows.Forms.Label();
+            this.t3 = new System.Windows.Forms.Label();
+            this.t4 = new System.Windows.Forms.Label();
+            this.t5 = new System.Windows.Forms.Label();
+            this.t6 = new System.Windows.Forms.Label();
+            this.t7 = new System.Windows.Forms.Label();
+            this.t8 = new System.Windows.Forms.Label();
+            this.t9 = new System.Windows.Forms.Label();
+            this.t10 = new System.Windows.Forms.Label();
+            this.t11 = new System.Windows.Forms.Label();
+            this.p1 = new System.Windows.Forms.Label();
+            this.textBox_process = new System.Windows.Forms.TextBox();
+            this.p2 = new System.Windows.Forms.Label();
+            this.textBox_result = new System.Windows.Forms.TextBox();
+            this.p3 = new System.Windows.Forms.Label();
+            this.textBox_doing = new System.Windows.Forms.TextBox();
+            this.p4 = new System.Windows.Forms.Label();
+            this.textBox_wait = new System.Windows.Forms.TextBox();
+            this.p5 = new System.Windows.Forms.Label();
+            this.textBox_ready = new System.Windows.Forms.TextBox();
+            this.label129 = new System.Windows.Forms.Label();
             this.menu2.SuspendLayout();
             this.menu1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -185,6 +218,16 @@ namespace computer1
             this.panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.menu3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.menu3e.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu2
@@ -260,24 +303,28 @@ namespace computer1
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Controls.Add(this.label129);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(781, 1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(330, 115);
             this.panel1.TabIndex = 0;
             // 
             // textBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox1.Location = new System.Drawing.Point(0, 27);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(330, 115);
+            this.textBox1.Size = new System.Drawing.Size(330, 88);
             this.textBox1.TabIndex = 0;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // treeView1
             // 
+            this.treeView1.BackColor = System.Drawing.SystemColors.Menu;
             this.treeView1.ContextMenuStrip = this.menu1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Font = new System.Drawing.Font("隶书", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1628,16 +1675,371 @@ namespace computer1
             this.删除文件ToolStripMenuItem.Text = "删除文件";
             this.删除文件ToolStripMenuItem.Click += new System.EventHandler(this.删除文件ToolStripMenuItem_Click);
             // 
+            // trackBar1
+            // 
+            this.trackBar1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBar1.Location = new System.Drawing.Point(0, 0);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(325, 56);
+            this.trackBar1.TabIndex = 3;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.t11);
+            this.panel4.Controls.Add(this.t10);
+            this.panel4.Controls.Add(this.t9);
+            this.panel4.Controls.Add(this.t8);
+            this.panel4.Controls.Add(this.t7);
+            this.panel4.Controls.Add(this.t6);
+            this.panel4.Controls.Add(this.t5);
+            this.panel4.Controls.Add(this.t4);
+            this.panel4.Controls.Add(this.t3);
+            this.panel4.Controls.Add(this.t2);
+            this.panel4.Controls.Add(this.t1);
+            this.panel4.Controls.Add(this.trackBar1);
+            this.panel4.Location = new System.Drawing.Point(451, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(325, 56);
+            this.panel4.TabIndex = 4;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel5.Controls.Add(this.textBox_process);
+            this.panel5.Controls.Add(this.p1);
+            this.panel5.Location = new System.Drawing.Point(455, 75);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(325, 269);
+            this.panel5.TabIndex = 5;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.SystemColors.Info;
+            this.panel6.Controls.Add(this.textBox_result);
+            this.panel6.Controls.Add(this.p2);
+            this.panel6.Location = new System.Drawing.Point(455, 353);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(324, 255);
+            this.panel6.TabIndex = 6;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panel7.Location = new System.Drawing.Point(84, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(269, 58);
+            this.panel7.TabIndex = 7;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(6, 75);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBox_ready);
+            this.splitContainer1.Panel1.Controls.Add(this.p5);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.textBox_wait);
+            this.splitContainer1.Panel2.Controls.Add(this.p4);
+            this.splitContainer1.Size = new System.Drawing.Size(443, 269);
+            this.splitContainer1.SplitterDistance = 209;
+            this.splitContainer1.TabIndex = 8;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel8.Controls.Add(this.textBox_doing);
+            this.panel8.Controls.Add(this.p3);
+            this.panel8.Location = new System.Drawing.Point(9, 353);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(439, 254);
+            this.panel8.TabIndex = 9;
+            // 
+            // menu3e
+            // 
+            this.menu3e.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menu3e.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.运行文件ToolStripMenuItem,
+            this.编辑文件ToolStripMenuItem1,
+            this.删除文件ToolStripMenuItem1});
+            this.menu3e.Name = "menu3e";
+            this.menu3e.Size = new System.Drawing.Size(139, 76);
+            // 
+            // 运行文件ToolStripMenuItem
+            // 
+            this.运行文件ToolStripMenuItem.Name = "运行文件ToolStripMenuItem";
+            this.运行文件ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.运行文件ToolStripMenuItem.Text = "运行文件";
+            this.运行文件ToolStripMenuItem.Click += new System.EventHandler(this.运行文件ToolStripMenuItem_Click);
+            // 
+            // 编辑文件ToolStripMenuItem1
+            // 
+            this.编辑文件ToolStripMenuItem1.Name = "编辑文件ToolStripMenuItem1";
+            this.编辑文件ToolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
+            this.编辑文件ToolStripMenuItem1.Text = "编辑文件";
+            this.编辑文件ToolStripMenuItem1.Click += new System.EventHandler(this.编辑文件ToolStripMenuItem1_Click);
+            // 
+            // 删除文件ToolStripMenuItem1
+            // 
+            this.删除文件ToolStripMenuItem1.Name = "删除文件ToolStripMenuItem1";
+            this.删除文件ToolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
+            this.删除文件ToolStripMenuItem1.Text = "删除文件";
+            this.删除文件ToolStripMenuItem1.Click += new System.EventHandler(this.删除文件ToolStripMenuItem1_Click);
+            // 
+            // t1
+            // 
+            this.t1.AutoSize = true;
+            this.t1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t1.Location = new System.Drawing.Point(12, 36);
+            this.t1.Name = "t1";
+            this.t1.Size = new System.Drawing.Size(15, 15);
+            this.t1.TabIndex = 4;
+            this.t1.Text = "1";
+            // 
+            // t2
+            // 
+            this.t2.AutoSize = true;
+            this.t2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t2.Location = new System.Drawing.Point(40, 36);
+            this.t2.Name = "t2";
+            this.t2.Size = new System.Drawing.Size(15, 15);
+            this.t2.TabIndex = 5;
+            this.t2.Text = "2";
+            // 
+            // t3
+            // 
+            this.t3.AutoSize = true;
+            this.t3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t3.Location = new System.Drawing.Point(68, 36);
+            this.t3.Name = "t3";
+            this.t3.Size = new System.Drawing.Size(15, 15);
+            this.t3.TabIndex = 6;
+            this.t3.Text = "3";
+            // 
+            // t4
+            // 
+            this.t4.AutoSize = true;
+            this.t4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t4.Location = new System.Drawing.Point(96, 36);
+            this.t4.Name = "t4";
+            this.t4.Size = new System.Drawing.Size(15, 15);
+            this.t4.TabIndex = 7;
+            this.t4.Text = "4";
+            // 
+            // t5
+            // 
+            this.t5.AutoSize = true;
+            this.t5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t5.Location = new System.Drawing.Point(124, 36);
+            this.t5.Name = "t5";
+            this.t5.Size = new System.Drawing.Size(15, 15);
+            this.t5.TabIndex = 8;
+            this.t5.Text = "5";
+            // 
+            // t6
+            // 
+            this.t6.AutoSize = true;
+            this.t6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t6.Location = new System.Drawing.Point(152, 36);
+            this.t6.Name = "t6";
+            this.t6.Size = new System.Drawing.Size(15, 15);
+            this.t6.TabIndex = 9;
+            this.t6.Text = "6";
+            // 
+            // t7
+            // 
+            this.t7.AutoSize = true;
+            this.t7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t7.Location = new System.Drawing.Point(180, 36);
+            this.t7.Name = "t7";
+            this.t7.Size = new System.Drawing.Size(15, 15);
+            this.t7.TabIndex = 10;
+            this.t7.Text = "7";
+            // 
+            // t8
+            // 
+            this.t8.AutoSize = true;
+            this.t8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t8.Location = new System.Drawing.Point(208, 36);
+            this.t8.Name = "t8";
+            this.t8.Size = new System.Drawing.Size(15, 15);
+            this.t8.TabIndex = 11;
+            this.t8.Text = "8";
+            // 
+            // t9
+            // 
+            this.t9.AutoSize = true;
+            this.t9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t9.Location = new System.Drawing.Point(236, 36);
+            this.t9.Name = "t9";
+            this.t9.Size = new System.Drawing.Size(15, 15);
+            this.t9.TabIndex = 12;
+            this.t9.Text = "9";
+            // 
+            // t10
+            // 
+            this.t10.AutoSize = true;
+            this.t10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t10.Location = new System.Drawing.Point(264, 36);
+            this.t10.Name = "t10";
+            this.t10.Size = new System.Drawing.Size(23, 15);
+            this.t10.TabIndex = 13;
+            this.t10.Text = "10";
+            // 
+            // t11
+            // 
+            this.t11.AutoSize = true;
+            this.t11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t11.Location = new System.Drawing.Point(300, 36);
+            this.t11.Name = "t11";
+            this.t11.Size = new System.Drawing.Size(23, 15);
+            this.t11.TabIndex = 14;
+            this.t11.Text = "11";
+            // 
+            // p1
+            // 
+            this.p1.BackColor = System.Drawing.SystemColors.Menu;
+            this.p1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p1.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p1.Location = new System.Drawing.Point(0, 0);
+            this.p1.Name = "p1";
+            this.p1.Size = new System.Drawing.Size(325, 41);
+            this.p1.TabIndex = 0;
+            this.p1.Text = "执行进程中间结果";
+            this.p1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_process
+            // 
+            this.textBox_process.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_process.Location = new System.Drawing.Point(0, 41);
+            this.textBox_process.Multiline = true;
+            this.textBox_process.Name = "textBox_process";
+            this.textBox_process.ReadOnly = true;
+            this.textBox_process.Size = new System.Drawing.Size(325, 228);
+            this.textBox_process.TabIndex = 1;
+            // 
+            // p2
+            // 
+            this.p2.BackColor = System.Drawing.SystemColors.Menu;
+            this.p2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p2.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p2.Location = new System.Drawing.Point(0, 0);
+            this.p2.Name = "p2";
+            this.p2.Size = new System.Drawing.Size(324, 41);
+            this.p2.TabIndex = 0;
+            this.p2.Text = "进程执行结果";
+            this.p2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_result
+            // 
+            this.textBox_result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_result.Location = new System.Drawing.Point(0, 41);
+            this.textBox_result.Multiline = true;
+            this.textBox_result.Name = "textBox_result";
+            this.textBox_result.ReadOnly = true;
+            this.textBox_result.Size = new System.Drawing.Size(324, 214);
+            this.textBox_result.TabIndex = 1;
+            // 
+            // p3
+            // 
+            this.p3.BackColor = System.Drawing.SystemColors.Menu;
+            this.p3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p3.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p3.Location = new System.Drawing.Point(0, 0);
+            this.p3.Name = "p3";
+            this.p3.Size = new System.Drawing.Size(439, 41);
+            this.p3.TabIndex = 0;
+            this.p3.Text = "正在执行的指令";
+            this.p3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_doing
+            // 
+            this.textBox_doing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_doing.Location = new System.Drawing.Point(0, 41);
+            this.textBox_doing.Multiline = true;
+            this.textBox_doing.Name = "textBox_doing";
+            this.textBox_doing.ReadOnly = true;
+            this.textBox_doing.Size = new System.Drawing.Size(439, 213);
+            this.textBox_doing.TabIndex = 1;
+            // 
+            // p4
+            // 
+            this.p4.BackColor = System.Drawing.SystemColors.Menu;
+            this.p4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p4.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p4.Location = new System.Drawing.Point(0, 0);
+            this.p4.Name = "p4";
+            this.p4.Size = new System.Drawing.Size(230, 41);
+            this.p4.TabIndex = 0;
+            this.p4.Text = "阻塞队列";
+            this.p4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_wait
+            // 
+            this.textBox_wait.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_wait.Location = new System.Drawing.Point(0, 41);
+            this.textBox_wait.Multiline = true;
+            this.textBox_wait.Name = "textBox_wait";
+            this.textBox_wait.ReadOnly = true;
+            this.textBox_wait.Size = new System.Drawing.Size(230, 228);
+            this.textBox_wait.TabIndex = 1;
+            // 
+            // p5
+            // 
+            this.p5.BackColor = System.Drawing.SystemColors.Menu;
+            this.p5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p5.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p5.Location = new System.Drawing.Point(0, 0);
+            this.p5.Name = "p5";
+            this.p5.Size = new System.Drawing.Size(209, 41);
+            this.p5.TabIndex = 1;
+            this.p5.Text = "就绪队列";
+            this.p5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_ready
+            // 
+            this.textBox_ready.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ready.Location = new System.Drawing.Point(0, 41);
+            this.textBox_ready.Multiline = true;
+            this.textBox_ready.Name = "textBox_ready";
+            this.textBox_ready.ReadOnly = true;
+            this.textBox_ready.Size = new System.Drawing.Size(209, 228);
+            this.textBox_ready.TabIndex = 2;
+            // 
+            // label129
+            // 
+            this.label129.BackColor = System.Drawing.SystemColors.Menu;
+            this.label129.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label129.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label129.Location = new System.Drawing.Point(0, 0);
+            this.label129.Name = "label129";
+            this.label129.Size = new System.Drawing.Size(330, 27);
+            this.label129.TabIndex = 1;
+            this.label129.Text = "命令接口";
+            this.label129.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1112, 614);
+            this.Controls.Add(this.panel8);
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "操作系统";
             this.menu2.ResumeLayout(false);
             this.menu1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1646,6 +2048,22 @@ namespace computer1
             this.panel3.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.menu3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.menu3e.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1797,6 +2215,39 @@ namespace computer1
         private System.Windows.Forms.ToolStripMenuItem 删除文件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除目录ToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.ContextMenuStrip menu3e;
+        private System.Windows.Forms.ToolStripMenuItem 运行文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 编辑文件ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 删除文件ToolStripMenuItem1;
+        private System.Windows.Forms.Label t11;
+        private System.Windows.Forms.Label t10;
+        private System.Windows.Forms.Label t9;
+        private System.Windows.Forms.Label t8;
+        private System.Windows.Forms.Label t7;
+        private System.Windows.Forms.Label t6;
+        private System.Windows.Forms.Label t5;
+        private System.Windows.Forms.Label t4;
+        private System.Windows.Forms.Label t3;
+        private System.Windows.Forms.Label t2;
+        private System.Windows.Forms.Label t1;
+        private System.Windows.Forms.TextBox textBox_process;
+        private System.Windows.Forms.Label p1;
+        private System.Windows.Forms.TextBox textBox_result;
+        private System.Windows.Forms.Label p2;
+        private System.Windows.Forms.TextBox textBox_ready;
+        private System.Windows.Forms.Label p5;
+        private System.Windows.Forms.TextBox textBox_wait;
+        private System.Windows.Forms.Label p4;
+        private System.Windows.Forms.TextBox textBox_doing;
+        private System.Windows.Forms.Label p3;
+        private System.Windows.Forms.Label label129;
     }
 }
 

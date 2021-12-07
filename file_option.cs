@@ -111,13 +111,14 @@ namespace computer1
             f.Close();
         }
         //递归遍历磁盘
-        public static void Traverse(int start, TreeNode node,ContextMenuStrip menu_d, ContextMenuStrip menu_l,List<string> Names)
+        public static void Traverse(int start, TreeNode node,ContextMenuStrip menu_d, ContextMenuStrip menu_l, ContextMenuStrip menu_le,List<string> Names)
         {
             string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
             FileStream f = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
             byte[] context = new byte[64];//整个块内容存放处
             byte[] item = new byte[8];//目录项存放处
             string filename = "";
+            string filetype = "";
             int start_ = 0;
             string ld = "";
             List<TreeNode> childern=new List<TreeNode>();
@@ -136,6 +137,7 @@ namespace computer1
                 }
                 byte[] a = new byte[1];
                 filename = Encoding.UTF8.GetString(item, 0, 3).Trim();
+                filetype= Encoding.UTF8.GetString(item, 3, 2).Trim();
                 start_ = item[6];
                 a[0] = item[5];
                 ld = Encoding.UTF8.GetString(a);
@@ -150,7 +152,17 @@ namespace computer1
                     newnode.SelectedImageIndex = 3;
                     newnode.Expand();
                     childern.Add(newnode);
-                    Traverse(start_, childern[ii], menu_d, menu_l,Names);
+                    Traverse(start_, childern[ii], menu_d, menu_l, menu_le,Names);
+                    ii++;
+                    i = i + 8;
+                }
+                else if(filetype=="ex")
+                {
+                    newnode.ContextMenuStrip = menu_le;
+                    newnode.ImageIndex = 0;
+                    newnode.SelectedImageIndex = 1;
+                    newnode.Expand();
+                    childern.Add(newnode);
                     ii++;
                     i = i + 8;
                 }

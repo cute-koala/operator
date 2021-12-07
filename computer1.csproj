@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CPU.cs" />
     <Compile Include="file_option.cs" />
     <Compile Include="edit_file.cs">
       <SubType>Form</SubType>
