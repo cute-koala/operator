@@ -8,22 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-
+using System.Text.RegularExpressions;
 
 namespace computer1
 {
     public partial class Form1 : Form
     {
-        /*进程控制块变量*/
-        struct PCB
-        {
-            int id;//标识符
-            int x;//寄存器
-            string state;//状态
-            int reason;//阻塞原因
-        }
-        private List<PCB> Block = new List<PCB>();//阻塞队列
-        private List<PCB> Ready = new List<PCB>();//就绪队列
 
         /*磁盘初始化变量*/
         private byte[] fat = new byte[128];
@@ -808,7 +798,81 @@ namespace computer1
         /*menu3e右键菜单*/
         private void 运行文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            /*查找该节点的起始盘块号*/
+            string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/disk.txt";
+            string filename = this.treeView1.SelectedNode.Text;//文件名
+            string filetype;//文件类型
+            int count = this.treeView1.SelectedNode.Parent.GetNodeCount(false);
+            string name = "";
+            FileStream f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Seek(128, SeekOrigin.Begin);
+            int j = 128;
+            int store;//起始盘块号
+            while (true)
+            {
 
+                byte[] bytes = new byte[3];
+                byte[] bytes1 = new byte[1];
+                byte[] bytes2 = new byte[2];
+                int i;
+                for (i = 0; i < 3; i++)
+                {
+                    f.Read(bytes1, 0, 1);
+                    if (bytes1[0] == Encoding.UTF8.GetBytes(" ").First())
+                    {
+                        break;
+                    }
+                    bytes[i] = bytes1[0];
+                }
+                name = Encoding.UTF8.GetString(bytes, 0, i);
+                if (name == filename)
+                {
+                    f.Seek(j + 3, SeekOrigin.Begin);
+                    f.Read(bytes2, 0, 2);
+                    filetype = Encoding.UTF8.GetString(bytes2).Trim();
+                    f.Seek(j + 6, SeekOrigin.Begin);
+                    store = f.ReadByte();
+                    break;
+                }
+                else
+                {
+                    j = j + 8;
+                    f.Seek(j, SeekOrigin.Begin);
+                }
+
+            }
+            f.Close();
+
+            /*提取内容*/
+            string context = "";
+            int ii = store;
+            while (fat[ii] != ii)
+            {
+                int next = fat[store];
+                f = new FileStream(path, FileMode.Open, FileAccess.Read);
+                f.Seek(store * 64, SeekOrigin.Begin);
+                byte[] t = new byte[64];
+                f.Read(t, 0, 64);
+                f.Close();
+                context = context + Encoding.UTF8.GetString(t);
+                ii = fat[ii];
+            }
+            f = new FileStream(path, FileMode.Open, FileAccess.Read);
+            f.Seek(ii * 64, SeekOrigin.Begin);
+            byte[] bytes3 = new byte[64];
+            f.Read(bytes3, 0, 64);
+            f.Close();
+            context = context + Encoding.UTF8.GetString(bytes3, 0, 64).Trim();
+
+            //创建进程控制块插入就绪队列
+            process.cache = Regex.Split(context, "\r\n");
+            process.create();
+            PCB[] r1 = process.Ready.ToArray();
+            textBox_ready.Text = "";
+            foreach (PCB i in r1)
+            {
+                textBox_ready.Text = textBox_ready.Text + i.id + "\r\n";
+            }
         }
         private void 编辑文件ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1387,5 +1451,239 @@ namespace computer1
                 }
             }
         }
+
+        /*时间片*/
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            process.time = trackBar1.Value;
+        }
+        /*时间每次轮转*/
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            times.Text = DateTime.Now.ToString("yyyy年MM月dd日hh时mm分ss秒");
+            if (process.flag == false)
+                textBox_nowprocess.Text = "当前进程为闲置进程";
+            else
+                textBox_nowprocess.Text = "当前进程为:"+process.now_do.id.ToString();
+            cpu();
+           
+        }
+
+        /*中央处理机*/
+        private void cpu()
+        {
+            if (process.time == 0 && process.flag==true){ process.PSW = 2; }
+            if (process.time == 0 && process.flag == false)
+            { }
+            else if (process.PSW == 0)//无中断
+            {
+                if (process.flag == true)//当前有正在运行的程序
+                {
+                    if (process.IR.Contains("x="))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.IR = process.IR.Remove(0, 2);
+                        process.DR = process.DR + Convert.ToInt32(process.IR);
+                        process.IR = process.Memory[process.PC];
+                        int index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+                    }
+                    else if (process.IR.Contains("x++"))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.DR++;
+
+                        process.IR = process.Memory[process.PC];
+                        int index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+                    }
+                    else if (process.IR.Contains("x--"))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.DR--;
+
+                        process.IR = process.Memory[process.PC];
+                        int index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+                    }
+                    else if (process.IR.Contains("!"))
+                    {
+                        process.block();
+                        //更新阻塞队列
+                        textBox_wait.Text = "";
+                        PCB[] b1 = process.Block.ToArray();
+                        foreach (PCB i in b1)
+                        {
+                            textBox_wait.Text = textBox_wait.Text + i.id + "\r\n";
+                        }
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+                        textBox_process.Text = "";
+                        process.time--;
+                    }
+                    else if (process.IR == "end")
+                    {
+                        process.PSW = 1;
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+                        textBox_result.Text = "x=" + process.DR.ToString();
+                        textBox_process.Text = "";
+                        process.time--;
+                    }
+                }
+                else if (process.Ready.Count != 0 || process.Block.Count!=0)
+                {
+                    while(process.Block.Count!=0)
+                    {
+                        process.awaken();
+                    }
+                    process.now_do = process.Ready.Dequeue();
+                    process.flag = true;
+                    //更新就绪、阻塞队列
+                    PCB[] r1 = process.Ready.ToArray();
+                    PCB[] b1 = process.Block.ToArray();
+                    textBox_ready.Text = "";
+                    textBox_wait.Text = "";
+                    foreach (PCB i in b1)
+                    {
+                        textBox_wait.Text = textBox_wait.Text + i.id + "\r\n";
+                    }
+                    foreach (PCB i in r1)
+                    {
+                        textBox_ready.Text = textBox_ready.Text + i.id + "\r\n";
+                    }
+
+
+                    process.DR = process.now_do.x;
+                    process.PC = process.now_do.pc;
+                    process.IR = process.Memory[process.PC];
+                    int index = process.now_do.memory.IndexOf(process.PC);
+                    if (index != process.now_do.memory.Count - 1)
+                        process.PC = process.now_do.memory[index + 1];
+                    if (process.IR.Contains("x="))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.IR = process.IR.Remove(0, 2);
+                        process.DR = process.DR + Convert.ToInt32(process.IR);
+                        process.IR = process.Memory[process.PC];
+                        index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+
+                    }
+                    else if (process.IR.Contains("x++"))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.DR++;
+
+                        process.IR = process.Memory[process.PC];
+                        index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+                    }
+                    else if (process.IR.Contains("x--"))
+                    {
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+
+                        process.DR--;
+
+                        process.IR = process.Memory[process.PC];
+                        index = process.now_do.memory.IndexOf(process.PC);
+                        if (index != process.now_do.memory.Count - 1)
+                            process.PC = process.now_do.memory[index + 1];
+                        //视图显示
+                        textBox_process.Text = textBox_process.Text + "\r\nx = " + process.DR.ToString();
+                        process.time--;
+                    }
+                    else if (process.IR.Contains("!"))
+                    {
+                        process.block();
+                        //更新阻塞队列
+                        PCB[] b2 = process.Block.ToArray();
+                        textBox_wait.Text = "";
+                        foreach (PCB i in b2)
+                        {
+                            textBox_wait.Text = textBox_wait.Text + i.id + "\r\n";
+                        }
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+                        textBox_process.Text = "";
+                        process.time--;
+                    }
+                    else if (process.IR == "end")
+                    {
+                        process.PSW = 1;
+                        //视图显示
+                        textBox_doing.Text = process.IR;
+                        textBox_result.Text = "x=" + process.DR.ToString();
+                        textBox_process.Text = "";
+                        process.time--;
+                    }
+                }
+                else
+                { }
+            }
+            else if (process.PSW == 1)//end中断
+            {
+                string path = "C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/out.txt";
+                FileStream f = new FileStream(path, FileMode.Truncate, FileAccess.ReadWrite);
+                byte[] bpath = Encoding.UTF8.GetBytes(path);
+                byte[] bresult = Encoding.UTF8.GetBytes("\nx=" + process.DR.ToString());
+                f.Write(bpath, 0, bpath.Length);
+                f.Write(bresult, 0, bresult.Length);
+                f.Close();
+                process.time = 0;
+                process.destory();
+                process.PSW = 0;
+            }
+            else if (process.PSW == 2)//时间片提前用完中断
+            {
+                process.PSW = 0;
+                process.block();
+                //更新阻塞队列
+                PCB[] b1 = process.Block.ToArray();
+                textBox_wait.Text = "";
+                foreach (PCB i in b1)
+                {
+                    textBox_wait.Text = textBox_wait.Text + i.id + "\r\n";
+                }
+                //视图显示
+                textBox_doing.Text = process.IR;
+                textBox_result.Text = "";
+                textBox_process.Text = "";
+            }
+            
+        }
+
     }
+
 }

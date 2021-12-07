@@ -1,0 +1,2 @@
+C:/Users/HP/Desktop/expriment/c++_vs/computer1/resource/out.txt
+x=3

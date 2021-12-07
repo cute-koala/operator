@@ -42,6 +42,7 @@ namespace computer1
             this.格式化磁盘ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label129 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -180,37 +181,39 @@ namespace computer1
             this.删除文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.t11 = new System.Windows.Forms.Label();
+            this.t10 = new System.Windows.Forms.Label();
+            this.t9 = new System.Windows.Forms.Label();
+            this.t8 = new System.Windows.Forms.Label();
+            this.t7 = new System.Windows.Forms.Label();
+            this.t6 = new System.Windows.Forms.Label();
+            this.t5 = new System.Windows.Forms.Label();
+            this.t4 = new System.Windows.Forms.Label();
+            this.t3 = new System.Windows.Forms.Label();
+            this.t2 = new System.Windows.Forms.Label();
+            this.t1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.textBox_process = new System.Windows.Forms.TextBox();
+            this.p1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox_result = new System.Windows.Forms.TextBox();
+            this.p2 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.textBox_ready = new System.Windows.Forms.TextBox();
+            this.p5 = new System.Windows.Forms.Label();
+            this.textBox_wait = new System.Windows.Forms.TextBox();
+            this.p4 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.textBox_doing = new System.Windows.Forms.TextBox();
+            this.p3 = new System.Windows.Forms.Label();
             this.menu3e = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.运行文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑文件ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除文件ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.t1 = new System.Windows.Forms.Label();
-            this.t2 = new System.Windows.Forms.Label();
-            this.t3 = new System.Windows.Forms.Label();
-            this.t4 = new System.Windows.Forms.Label();
-            this.t5 = new System.Windows.Forms.Label();
-            this.t6 = new System.Windows.Forms.Label();
-            this.t7 = new System.Windows.Forms.Label();
-            this.t8 = new System.Windows.Forms.Label();
-            this.t9 = new System.Windows.Forms.Label();
-            this.t10 = new System.Windows.Forms.Label();
-            this.t11 = new System.Windows.Forms.Label();
-            this.p1 = new System.Windows.Forms.Label();
-            this.textBox_process = new System.Windows.Forms.TextBox();
-            this.p2 = new System.Windows.Forms.Label();
-            this.textBox_result = new System.Windows.Forms.TextBox();
-            this.p3 = new System.Windows.Forms.Label();
-            this.textBox_doing = new System.Windows.Forms.TextBox();
-            this.p4 = new System.Windows.Forms.Label();
-            this.textBox_wait = new System.Windows.Forms.TextBox();
-            this.p5 = new System.Windows.Forms.Label();
-            this.textBox_ready = new System.Windows.Forms.TextBox();
-            this.label129 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.times = new System.Windows.Forms.Label();
+            this.textBox_nowprocess = new System.Windows.Forms.TextBox();
             this.menu2.SuspendLayout();
             this.menu1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -222,6 +225,7 @@ namespace computer1
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -310,6 +314,18 @@ namespace computer1
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(330, 115);
             this.panel1.TabIndex = 0;
+            // 
+            // label129
+            // 
+            this.label129.BackColor = System.Drawing.SystemColors.Menu;
+            this.label129.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label129.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label129.Location = new System.Drawing.Point(0, 0);
+            this.label129.Name = "label129";
+            this.label129.Size = new System.Drawing.Size(330, 27);
+            this.label129.TabIndex = 1;
+            this.label129.Text = "命令接口";
+            this.label129.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
@@ -1682,9 +1698,10 @@ namespace computer1
             this.trackBar1.Location = new System.Drawing.Point(0, 0);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(325, 56);
+            this.trackBar1.Size = new System.Drawing.Size(325, 78);
             this.trackBar1.TabIndex = 3;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
             // panel4
             // 
@@ -1700,10 +1717,120 @@ namespace computer1
             this.panel4.Controls.Add(this.t2);
             this.panel4.Controls.Add(this.t1);
             this.panel4.Controls.Add(this.trackBar1);
-            this.panel4.Location = new System.Drawing.Point(451, 3);
+            this.panel4.Location = new System.Drawing.Point(453, 1);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(325, 56);
+            this.panel4.Size = new System.Drawing.Size(325, 78);
             this.panel4.TabIndex = 4;
+            // 
+            // t11
+            // 
+            this.t11.AutoSize = true;
+            this.t11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t11.Location = new System.Drawing.Point(300, 36);
+            this.t11.Name = "t11";
+            this.t11.Size = new System.Drawing.Size(23, 15);
+            this.t11.TabIndex = 14;
+            this.t11.Text = "10";
+            // 
+            // t10
+            // 
+            this.t10.AutoSize = true;
+            this.t10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t10.Location = new System.Drawing.Point(264, 36);
+            this.t10.Name = "t10";
+            this.t10.Size = new System.Drawing.Size(15, 15);
+            this.t10.TabIndex = 13;
+            this.t10.Text = "9";
+            // 
+            // t9
+            // 
+            this.t9.AutoSize = true;
+            this.t9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t9.Location = new System.Drawing.Point(236, 36);
+            this.t9.Name = "t9";
+            this.t9.Size = new System.Drawing.Size(15, 15);
+            this.t9.TabIndex = 12;
+            this.t9.Text = "8";
+            // 
+            // t8
+            // 
+            this.t8.AutoSize = true;
+            this.t8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t8.Location = new System.Drawing.Point(208, 36);
+            this.t8.Name = "t8";
+            this.t8.Size = new System.Drawing.Size(15, 15);
+            this.t8.TabIndex = 11;
+            this.t8.Text = "7";
+            // 
+            // t7
+            // 
+            this.t7.AutoSize = true;
+            this.t7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t7.Location = new System.Drawing.Point(180, 36);
+            this.t7.Name = "t7";
+            this.t7.Size = new System.Drawing.Size(15, 15);
+            this.t7.TabIndex = 10;
+            this.t7.Text = "6";
+            // 
+            // t6
+            // 
+            this.t6.AutoSize = true;
+            this.t6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t6.Location = new System.Drawing.Point(152, 36);
+            this.t6.Name = "t6";
+            this.t6.Size = new System.Drawing.Size(15, 15);
+            this.t6.TabIndex = 9;
+            this.t6.Text = "5";
+            // 
+            // t5
+            // 
+            this.t5.AutoSize = true;
+            this.t5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t5.Location = new System.Drawing.Point(124, 36);
+            this.t5.Name = "t5";
+            this.t5.Size = new System.Drawing.Size(15, 15);
+            this.t5.TabIndex = 8;
+            this.t5.Text = "4";
+            // 
+            // t4
+            // 
+            this.t4.AutoSize = true;
+            this.t4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t4.Location = new System.Drawing.Point(96, 36);
+            this.t4.Name = "t4";
+            this.t4.Size = new System.Drawing.Size(15, 15);
+            this.t4.TabIndex = 7;
+            this.t4.Text = "3";
+            // 
+            // t3
+            // 
+            this.t3.AutoSize = true;
+            this.t3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t3.Location = new System.Drawing.Point(68, 36);
+            this.t3.Name = "t3";
+            this.t3.Size = new System.Drawing.Size(15, 15);
+            this.t3.TabIndex = 6;
+            this.t3.Text = "2";
+            // 
+            // t2
+            // 
+            this.t2.AutoSize = true;
+            this.t2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t2.Location = new System.Drawing.Point(40, 36);
+            this.t2.Name = "t2";
+            this.t2.Size = new System.Drawing.Size(15, 15);
+            this.t2.TabIndex = 5;
+            this.t2.Text = "1";
+            // 
+            // t1
+            // 
+            this.t1.AutoSize = true;
+            this.t1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.t1.Location = new System.Drawing.Point(12, 36);
+            this.t1.Name = "t1";
+            this.t1.Size = new System.Drawing.Size(15, 15);
+            this.t1.TabIndex = 4;
+            this.t1.Text = "0";
             // 
             // panel5
             // 
@@ -1715,6 +1842,28 @@ namespace computer1
             this.panel5.Size = new System.Drawing.Size(325, 269);
             this.panel5.TabIndex = 5;
             // 
+            // textBox_process
+            // 
+            this.textBox_process.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_process.Location = new System.Drawing.Point(0, 41);
+            this.textBox_process.Multiline = true;
+            this.textBox_process.Name = "textBox_process";
+            this.textBox_process.ReadOnly = true;
+            this.textBox_process.Size = new System.Drawing.Size(325, 228);
+            this.textBox_process.TabIndex = 1;
+            // 
+            // p1
+            // 
+            this.p1.BackColor = System.Drawing.SystemColors.Menu;
+            this.p1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p1.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p1.Location = new System.Drawing.Point(0, 0);
+            this.p1.Name = "p1";
+            this.p1.Size = new System.Drawing.Size(325, 41);
+            this.p1.TabIndex = 0;
+            this.p1.Text = "执行进程中间结果";
+            this.p1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.Info;
@@ -1725,12 +1874,36 @@ namespace computer1
             this.panel6.Size = new System.Drawing.Size(324, 255);
             this.panel6.TabIndex = 6;
             // 
+            // textBox_result
+            // 
+            this.textBox_result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_result.Location = new System.Drawing.Point(0, 41);
+            this.textBox_result.Multiline = true;
+            this.textBox_result.Name = "textBox_result";
+            this.textBox_result.ReadOnly = true;
+            this.textBox_result.Size = new System.Drawing.Size(324, 214);
+            this.textBox_result.TabIndex = 1;
+            // 
+            // p2
+            // 
+            this.p2.BackColor = System.Drawing.SystemColors.Menu;
+            this.p2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p2.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p2.Location = new System.Drawing.Point(0, 0);
+            this.p2.Name = "p2";
+            this.p2.Size = new System.Drawing.Size(324, 41);
+            this.p2.TabIndex = 0;
+            this.p2.Text = "进程执行结果";
+            this.p2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel7.Location = new System.Drawing.Point(84, 3);
+            this.panel7.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel7.Controls.Add(this.textBox_nowprocess);
+            this.panel7.Controls.Add(this.times);
+            this.panel7.Location = new System.Drawing.Point(13, 1);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(269, 58);
+            this.panel7.Size = new System.Drawing.Size(436, 68);
             this.panel7.TabIndex = 7;
             // 
             // splitContainer1
@@ -1751,6 +1924,50 @@ namespace computer1
             this.splitContainer1.SplitterDistance = 209;
             this.splitContainer1.TabIndex = 8;
             // 
+            // textBox_ready
+            // 
+            this.textBox_ready.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ready.Location = new System.Drawing.Point(0, 41);
+            this.textBox_ready.Multiline = true;
+            this.textBox_ready.Name = "textBox_ready";
+            this.textBox_ready.ReadOnly = true;
+            this.textBox_ready.Size = new System.Drawing.Size(209, 228);
+            this.textBox_ready.TabIndex = 2;
+            // 
+            // p5
+            // 
+            this.p5.BackColor = System.Drawing.SystemColors.Menu;
+            this.p5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p5.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p5.Location = new System.Drawing.Point(0, 0);
+            this.p5.Name = "p5";
+            this.p5.Size = new System.Drawing.Size(209, 41);
+            this.p5.TabIndex = 1;
+            this.p5.Text = "就绪队列";
+            this.p5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_wait
+            // 
+            this.textBox_wait.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_wait.Location = new System.Drawing.Point(0, 41);
+            this.textBox_wait.Multiline = true;
+            this.textBox_wait.Name = "textBox_wait";
+            this.textBox_wait.ReadOnly = true;
+            this.textBox_wait.Size = new System.Drawing.Size(230, 228);
+            this.textBox_wait.TabIndex = 1;
+            // 
+            // p4
+            // 
+            this.p4.BackColor = System.Drawing.SystemColors.Menu;
+            this.p4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p4.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p4.Location = new System.Drawing.Point(0, 0);
+            this.p4.Name = "p4";
+            this.p4.Size = new System.Drawing.Size(230, 41);
+            this.p4.TabIndex = 0;
+            this.p4.Text = "阻塞队列";
+            this.p4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -1760,6 +1977,28 @@ namespace computer1
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(439, 254);
             this.panel8.TabIndex = 9;
+            // 
+            // textBox_doing
+            // 
+            this.textBox_doing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_doing.Location = new System.Drawing.Point(0, 41);
+            this.textBox_doing.Multiline = true;
+            this.textBox_doing.Name = "textBox_doing";
+            this.textBox_doing.ReadOnly = true;
+            this.textBox_doing.Size = new System.Drawing.Size(439, 213);
+            this.textBox_doing.TabIndex = 1;
+            // 
+            // p3
+            // 
+            this.p3.BackColor = System.Drawing.SystemColors.Menu;
+            this.p3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.p3.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.p3.Location = new System.Drawing.Point(0, 0);
+            this.p3.Name = "p3";
+            this.p3.Size = new System.Drawing.Size(439, 41);
+            this.p3.TabIndex = 0;
+            this.p3.Text = "正在执行的指令";
+            this.p3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menu3e
             // 
@@ -1792,237 +2031,31 @@ namespace computer1
             this.删除文件ToolStripMenuItem1.Text = "删除文件";
             this.删除文件ToolStripMenuItem1.Click += new System.EventHandler(this.删除文件ToolStripMenuItem1_Click);
             // 
-            // t1
+            // timer1
             // 
-            this.t1.AutoSize = true;
-            this.t1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t1.Location = new System.Drawing.Point(12, 36);
-            this.t1.Name = "t1";
-            this.t1.Size = new System.Drawing.Size(15, 15);
-            this.t1.TabIndex = 4;
-            this.t1.Text = "1";
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // t2
+            // times
             // 
-            this.t2.AutoSize = true;
-            this.t2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t2.Location = new System.Drawing.Point(40, 36);
-            this.t2.Name = "t2";
-            this.t2.Size = new System.Drawing.Size(15, 15);
-            this.t2.TabIndex = 5;
-            this.t2.Text = "2";
+            this.times.BackColor = System.Drawing.SystemColors.Menu;
+            this.times.Dock = System.Windows.Forms.DockStyle.Top;
+            this.times.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.times.Location = new System.Drawing.Point(0, 0);
+            this.times.Name = "times";
+            this.times.Size = new System.Drawing.Size(436, 23);
+            this.times.TabIndex = 0;
             // 
-            // t3
+            // textBox_nowprocess
             // 
-            this.t3.AutoSize = true;
-            this.t3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t3.Location = new System.Drawing.Point(68, 36);
-            this.t3.Name = "t3";
-            this.t3.Size = new System.Drawing.Size(15, 15);
-            this.t3.TabIndex = 6;
-            this.t3.Text = "3";
-            // 
-            // t4
-            // 
-            this.t4.AutoSize = true;
-            this.t4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t4.Location = new System.Drawing.Point(96, 36);
-            this.t4.Name = "t4";
-            this.t4.Size = new System.Drawing.Size(15, 15);
-            this.t4.TabIndex = 7;
-            this.t4.Text = "4";
-            // 
-            // t5
-            // 
-            this.t5.AutoSize = true;
-            this.t5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t5.Location = new System.Drawing.Point(124, 36);
-            this.t5.Name = "t5";
-            this.t5.Size = new System.Drawing.Size(15, 15);
-            this.t5.TabIndex = 8;
-            this.t5.Text = "5";
-            // 
-            // t6
-            // 
-            this.t6.AutoSize = true;
-            this.t6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t6.Location = new System.Drawing.Point(152, 36);
-            this.t6.Name = "t6";
-            this.t6.Size = new System.Drawing.Size(15, 15);
-            this.t6.TabIndex = 9;
-            this.t6.Text = "6";
-            // 
-            // t7
-            // 
-            this.t7.AutoSize = true;
-            this.t7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t7.Location = new System.Drawing.Point(180, 36);
-            this.t7.Name = "t7";
-            this.t7.Size = new System.Drawing.Size(15, 15);
-            this.t7.TabIndex = 10;
-            this.t7.Text = "7";
-            // 
-            // t8
-            // 
-            this.t8.AutoSize = true;
-            this.t8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t8.Location = new System.Drawing.Point(208, 36);
-            this.t8.Name = "t8";
-            this.t8.Size = new System.Drawing.Size(15, 15);
-            this.t8.TabIndex = 11;
-            this.t8.Text = "8";
-            // 
-            // t9
-            // 
-            this.t9.AutoSize = true;
-            this.t9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t9.Location = new System.Drawing.Point(236, 36);
-            this.t9.Name = "t9";
-            this.t9.Size = new System.Drawing.Size(15, 15);
-            this.t9.TabIndex = 12;
-            this.t9.Text = "9";
-            // 
-            // t10
-            // 
-            this.t10.AutoSize = true;
-            this.t10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t10.Location = new System.Drawing.Point(264, 36);
-            this.t10.Name = "t10";
-            this.t10.Size = new System.Drawing.Size(23, 15);
-            this.t10.TabIndex = 13;
-            this.t10.Text = "10";
-            // 
-            // t11
-            // 
-            this.t11.AutoSize = true;
-            this.t11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.t11.Location = new System.Drawing.Point(300, 36);
-            this.t11.Name = "t11";
-            this.t11.Size = new System.Drawing.Size(23, 15);
-            this.t11.TabIndex = 14;
-            this.t11.Text = "11";
-            // 
-            // p1
-            // 
-            this.p1.BackColor = System.Drawing.SystemColors.Menu;
-            this.p1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.p1.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.p1.Location = new System.Drawing.Point(0, 0);
-            this.p1.Name = "p1";
-            this.p1.Size = new System.Drawing.Size(325, 41);
-            this.p1.TabIndex = 0;
-            this.p1.Text = "执行进程中间结果";
-            this.p1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_process
-            // 
-            this.textBox_process.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_process.Location = new System.Drawing.Point(0, 41);
-            this.textBox_process.Multiline = true;
-            this.textBox_process.Name = "textBox_process";
-            this.textBox_process.ReadOnly = true;
-            this.textBox_process.Size = new System.Drawing.Size(325, 228);
-            this.textBox_process.TabIndex = 1;
-            // 
-            // p2
-            // 
-            this.p2.BackColor = System.Drawing.SystemColors.Menu;
-            this.p2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.p2.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.p2.Location = new System.Drawing.Point(0, 0);
-            this.p2.Name = "p2";
-            this.p2.Size = new System.Drawing.Size(324, 41);
-            this.p2.TabIndex = 0;
-            this.p2.Text = "进程执行结果";
-            this.p2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_result
-            // 
-            this.textBox_result.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_result.Location = new System.Drawing.Point(0, 41);
-            this.textBox_result.Multiline = true;
-            this.textBox_result.Name = "textBox_result";
-            this.textBox_result.ReadOnly = true;
-            this.textBox_result.Size = new System.Drawing.Size(324, 214);
-            this.textBox_result.TabIndex = 1;
-            // 
-            // p3
-            // 
-            this.p3.BackColor = System.Drawing.SystemColors.Menu;
-            this.p3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.p3.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.p3.Location = new System.Drawing.Point(0, 0);
-            this.p3.Name = "p3";
-            this.p3.Size = new System.Drawing.Size(439, 41);
-            this.p3.TabIndex = 0;
-            this.p3.Text = "正在执行的指令";
-            this.p3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_doing
-            // 
-            this.textBox_doing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_doing.Location = new System.Drawing.Point(0, 41);
-            this.textBox_doing.Multiline = true;
-            this.textBox_doing.Name = "textBox_doing";
-            this.textBox_doing.ReadOnly = true;
-            this.textBox_doing.Size = new System.Drawing.Size(439, 213);
-            this.textBox_doing.TabIndex = 1;
-            // 
-            // p4
-            // 
-            this.p4.BackColor = System.Drawing.SystemColors.Menu;
-            this.p4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.p4.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.p4.Location = new System.Drawing.Point(0, 0);
-            this.p4.Name = "p4";
-            this.p4.Size = new System.Drawing.Size(230, 41);
-            this.p4.TabIndex = 0;
-            this.p4.Text = "阻塞队列";
-            this.p4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_wait
-            // 
-            this.textBox_wait.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_wait.Location = new System.Drawing.Point(0, 41);
-            this.textBox_wait.Multiline = true;
-            this.textBox_wait.Name = "textBox_wait";
-            this.textBox_wait.ReadOnly = true;
-            this.textBox_wait.Size = new System.Drawing.Size(230, 228);
-            this.textBox_wait.TabIndex = 1;
-            // 
-            // p5
-            // 
-            this.p5.BackColor = System.Drawing.SystemColors.Menu;
-            this.p5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.p5.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.p5.Location = new System.Drawing.Point(0, 0);
-            this.p5.Name = "p5";
-            this.p5.Size = new System.Drawing.Size(209, 41);
-            this.p5.TabIndex = 1;
-            this.p5.Text = "就绪队列";
-            this.p5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox_ready
-            // 
-            this.textBox_ready.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_ready.Location = new System.Drawing.Point(0, 41);
-            this.textBox_ready.Multiline = true;
-            this.textBox_ready.Name = "textBox_ready";
-            this.textBox_ready.ReadOnly = true;
-            this.textBox_ready.Size = new System.Drawing.Size(209, 228);
-            this.textBox_ready.TabIndex = 2;
-            // 
-            // label129
-            // 
-            this.label129.BackColor = System.Drawing.SystemColors.Menu;
-            this.label129.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label129.Font = new System.Drawing.Font("楷体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label129.Location = new System.Drawing.Point(0, 0);
-            this.label129.Name = "label129";
-            this.label129.Size = new System.Drawing.Size(330, 27);
-            this.label129.TabIndex = 1;
-            this.label129.Text = "命令接口";
-            this.label129.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBox_nowprocess.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_nowprocess.Location = new System.Drawing.Point(0, 23);
+            this.textBox_nowprocess.Multiline = true;
+            this.textBox_nowprocess.Name = "textBox_nowprocess";
+            this.textBox_nowprocess.ReadOnly = true;
+            this.textBox_nowprocess.Size = new System.Drawing.Size(436, 45);
+            this.textBox_nowprocess.TabIndex = 1;
             // 
             // Form1
             // 
@@ -2055,6 +2088,8 @@ namespace computer1
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -2248,6 +2283,9 @@ namespace computer1
         private System.Windows.Forms.TextBox textBox_doing;
         private System.Windows.Forms.Label p3;
         private System.Windows.Forms.Label label129;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox textBox_nowprocess;
+        private System.Windows.Forms.Label times;
     }
 }
 
